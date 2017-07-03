@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Collector from './components/collector'
 import SearchBar from './components/search'
-import Movie from './components/movie'
+import Movie from './components/mov'
 import List from './components/list'
 
 
@@ -16,8 +16,15 @@ class Routes extends Component {
     return (
       <Router>
       <div>
-        
-        <Route exact path="/" component={SearchBar} />
+        <header className="header-basic">
+          <div className="header-limiter">
+            <h1><NavLink activeClassName="selected" exact to="/">Home | </NavLink></h1>
+            <h1><NavLink activeClassName="selected" exact to="/list">Movies List</NavLink></h1>
+              <Route exact path="/" component={SearchBar} />
+            <nav>
+            </nav>
+          </div>
+        </header>
 
         <Route exact path="/" component={Collector} />
         <Route exact path="/movie/:movie" component={Movie} />

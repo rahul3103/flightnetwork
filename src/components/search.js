@@ -38,7 +38,7 @@ class SearchBar extends Component {
           })
     return (
       <form>
-        <input onChange={event => this.onInputChange(event)} type="search" placeholder="&#xf002; Search by Movie Name" />
+        <input onChange={event => this.onInputChange(event)} type="search" placeholder="Search by Movie Name" />
         <ul>{ui}</ul>
   </form>
     );

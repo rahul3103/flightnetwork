@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './card.css';
 
 class Card extends Component {
   constructor(props) {

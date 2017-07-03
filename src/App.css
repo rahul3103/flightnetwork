@@ -1,20 +1,9 @@
 h1 {
   font-family: Verdana;
   font-weight: normal;
-  color: #024457;
   text-align: center;
 }
-h1 span {
-  color: #167F92;
-}
 
-.btn {
-    margin-right: 10px;
-}
-
-.login {
-    float: right;
-}
 
 .header-basic {
     background-color: #292c2f;
@@ -30,14 +19,19 @@ h1 span {
     margin: 0 auto;
 }
 
+.header-limiter a{
+  color: #4DC3FA;
+}
+
 /* Logo */
 
 .header-basic .header-limiter h1 {
     float: left;
-    font: normal 28px Arial, Helvetica, sans-serif;
+    font: normal 20px Arial, Helvetica, sans-serif;
     font-family: Verdana;
     line-height: 40px;
     margin: 0;
+    padding-right: 10px;
 }
 
 .header-basic .header-limiter h1 span {

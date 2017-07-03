@@ -11,7 +11,8 @@ class List extends Component {
     this.state = {
       movies: [],
       currentPage: 1,
-      moviesPerPage: 10
+      moviesPerPage: 10,
+      toggle: true
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -46,8 +47,19 @@ class List extends Component {
       })})
   }
 
-  sortBy(){
-
+  sortBy(e) {
+    if (this.state.toggle) {
+    this.setState({movies: this.state.movies.sort(function(a, b) {
+    return a[e] === b[e] ? 0 : +(a[e] < b[e]) || -1;
+    })})
+    this.setState({toggle: false, currentPage: 1})
+    }
+    else {
+      this.setState({movies: this.state.movies.sort(function(a, b) {
+    return a[e] === b[e] ? 0 : +(a[e] > b[e]) || -1;
+    })})
+    this.setState({toggle: true, currentPage: 1})
+    }
   }
 
   next(e) {
@@ -87,13 +99,13 @@ class List extends Component {
       <table className="container">
           <thead>
             <tr>
-              <th><h1><a className="sort" onClick={()=>this.sortBy('id')}># </a>Movie Title</h1></th>
-              <th><h1><a className="sort" onClick={()=>this.sortBy('name')}># </a>Director Name</h1></th>
-              <th><h1><a className="sort" onClick={()=>this.sortBy('mobile')}>#</a>Language</h1></th>
-              <th><h1><a className="sort" onClick={()=>this.sortBy('email')}># </a>Country</h1></th>
-              <th><h1><a className="sort" onClick={()=>this.sortBy('rdate')}># </a>Content Rating</h1></th>
-              <th><h1><a className="sort" onClick={()=>this.sortBy('rtype')}># </a>Budget</h1></th>
-              <th><h1><a className="sort" onClick={()=>this.sortBy('tickets')}># </a>Title Year</h1></th>
+              <th><h1><a className="sort" onClick={()=>this.sortBy('movie_title')}>Movie Title</a></h1></th>
+              <th><h1><a className="sort" onClick={()=>this.sortBy('director_name')}>Director Name</a></h1></th>
+              <th><h1><a className="sort" onClick={()=>this.sortBy('language')}>Language</a></h1></th>
+              <th><h1><a className="sort" onClick={()=>this.sortBy('country')}>Country</a></h1></th>
+              <th><h1><a className="sort" onClick={()=>this.sortBy('content_rating')}>Content Rating</a></h1></th>
+              <th><h1><a className="sort" onClick={()=>this.sortBy('budget')}>Budget($)</a></h1></th>
+              <th><h1><a className="sort" onClick={()=>this.sortBy('title_year')}>Title Year</a></h1></th>
             </tr>
           </thead>
           <tbody>
