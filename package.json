@@ -1,0 +1,25 @@
+{
+  "name": "flightnetwork",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.16.2",
+    "lovefield": "^2.1.12",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-paginate": "^4.4.3",
+    "react-router-dom": "^4.1.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.0.0",
+    "react-scripts": "1.0.10"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "deploy" : "npm run build&&gh-pages -d build"
+  },
+  "homepage": "https://rahul3103.github.io/flightnetwork"
+}
