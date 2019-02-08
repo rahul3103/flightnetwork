@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { schema, Type } from 'lovefield';
-import Front from './front'
+import Front from './front';
 
 class Collector extends Component {
-  
   constructor(props) {
     super(props);
 
@@ -15,19 +14,17 @@ class Collector extends Component {
     };
     this.insertdb = this.insertdb.bind(this);
     this.selectten = this.selectten.bind(this);
-
-    
   }
-
 
   createdb() {
     //check for support
     if (!('indexedDB' in window)) {
-      console.log('This browser doesn\'t support IndexedDB');
+      console.log("This browser doesn't support IndexedDB");
       return;
     }
     const schemaBuilder = schema.create('flight', 1);
-    schemaBuilder.createTable('Movies')
+    schemaBuilder
+      .createTable('Movies')
       .addColumn('movie_title', Type.STRING)
       .addColumn('director_name', Type.STRING)
       .addColumn('actor_1_name', Type.STRING)
@@ -40,48 +37,53 @@ class Collector extends Component {
       .addColumn('title_year', Type.NUMBER)
       .addColumn('plot_keywords', Type.STRING)
       .addColumn('movie_imdb_link', Type.STRING)
-      .addPrimaryKey(['movie_title'])
+      .addPrimaryKey(['movie_title']);
 
-    return schemaBuilder
+    return schemaBuilder;
   }
 
   insertdb(db, values) {
     const item = db.getSchema().table('Movies');
     const rows = values.map(value => item.createRow(value));
-    db.insertOrReplace().into(item).values(rows).exec();
-}
+    db.insertOrReplace()
+      .into(item)
+      .values(rows)
+      .exec();
+  }
   selectten(db) {
     const item = db.getSchema().table('Movies');
-    db.select().from(item).limit(10).exec().then(rows => this.setState ({ten: this.state.ten.concat(rows)}))
+    db.select()
+      .from(item)
+      .limit(10)
+      .exec()
+      .then(rows => this.setState({ ten: this.state.ten.concat(rows) }));
   }
-
 
   componentWillMount() {
     const self = this;
-    const API_URL = 'http://starlord.hackerearth.com/movieslisting'
-    axios.get(API_URL)
-    .then(function (response) {
-      let data = response.data.map(row => {
-        row.movie_title = row.movie_title.trim().toLowerCase();
-        return row;
-      });
-      const schema = self.createdb()
-      schema.connect().then(db => {
-        self.insertdb(db, data)
-        self.selectten(db)
+    const API_URL = 'https://demo2837922.mockable.io/movies';
+    axios
+      .get(API_URL)
+      .then(function(response) {
+        let data = response.data.map(row => {
+          row.movie_title = row.movie_title.trim().toLowerCase();
+          return row;
+        });
+        const schema = self.createdb();
+        schema.connect().then(db => {
+          self.insertdb(db, data);
+          self.selectten(db);
+        });
       })
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .catch(function(error) {
+        console.log(error);
+      });
   }
-
-  
 
   render() {
     return (
       <div>
-      <Front data={this.state.ten}/>
+        <Front data={this.state.ten} />
       </div>
     );
   }

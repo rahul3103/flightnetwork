@@ -3,7 +3,6 @@
   box-sizing: border-box;
 }
 
-
 .moviecard {
   font-family: 'Helvetica', sans-serif, 'Ariel';
   position: relative;
@@ -88,7 +87,7 @@
 .moviecard .movie-ratings span.star {
   display: inline-block;
   margin-right: 12px;
-  color: #F0DE00;
+  color: #f0de00;
   font-size: 36px;
 }
 .moviecard .movie-ratings span.score {
@@ -124,5 +123,3 @@
   opacity: 0;
   width: 0px;
 }
-
-
